@@ -1,0 +1,568 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "hour": 23
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -340,
+        0
+      ],
+      "id": "c92b792a-d63f-47df-ad2c-958b7c136a93",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lWKAhtK72OhmbnYh",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "= subject:{{ $json.Subject }}\nemail body:{{ $json.snippet }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "promotion ",
+              "description": "anybody coming up for promotion of their prducts "
+            },
+            {
+              "category": "social",
+              "description": "mail from social media like youtube ,linked in and more"
+            },
+            {
+              "category": "personal",
+              "description": "an email for my personal use or my friends, family"
+            },
+            {
+              "category": "misc",
+              "description": "any other mails "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        -120,
+        0
+      ],
+      "id": "51564305-1721-4821-92fe-45cbe5bd12e3",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        200
+      ],
+      "id": "265142de-e69d-4c3f-8066-9074e09ca9e1",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "CV5tcaHA5PDFZjtx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "19781f533f611212",
+        "labelIds": [
+          "Label_8574681003035065511"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        280,
+        240
+      ],
+      "id": "31312376-4d52-4ea4-ba65-6be1f3549501",
+      "name": "Gmail",
+      "webhookId": "d2262f86-cef1-4e34-b055-49c95f87f23b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lWKAhtK72OhmbnYh",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "19781f533f611212",
+        "labelIds": [
+          "Label_3754842606747447459"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        280,
+        -340
+      ],
+      "id": "38c06cb8-3bbb-4125-89b7-50ee680c96cb",
+      "name": "Gmail1",
+      "webhookId": "d2262f86-cef1-4e34-b055-49c95f87f23b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lWKAhtK72OhmbnYh",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "19781f533f611212",
+        "labelIds": [
+          "CATEGORY_SOCIAL"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        280,
+        -160
+      ],
+      "id": "3048b3f3-d820-4ba8-a755-7c6bc41599c4",
+      "name": "Gmail2",
+      "webhookId": "d2262f86-cef1-4e34-b055-49c95f87f23b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lWKAhtK72OhmbnYh",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "19781f533f611212",
+        "labelIds": [
+          "Label_7235221412619486713"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        280,
+        40
+      ],
+      "id": "dd2b38f1-db52-46eb-b7a2-edcd95b2dc1b",
+      "name": "Gmail3",
+      "webhookId": "d2262f86-cef1-4e34-b055-49c95f87f23b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lWKAhtK72OhmbnYh",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "19781f533f611212"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        500,
+        -340
+      ],
+      "id": "033f9475-10b0-4598-b7ca-075c73de88f6",
+      "name": "Gmail4",
+      "webhookId": "8ce28da9-53f6-49c1-ad85-2470a40635e1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lWKAhtK72OhmbnYh",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "you are an intelligent bot at summarizing mails",
+              "role": "system"
+            },
+            {
+              "content": "=subject: {{ $('Gmail Trigger').item.json.Subject }}\nbody:{{ $('Gmail Trigger').item.json.snippet }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        500,
+        -160
+      ],
+      "id": "4019509d-a0fb-41a9-96d3-585b948b9ccd",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "7Vq3JNqxT6GaWRqB",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1pZF-ouLF_tDNrHl3HSpHaa4rCO_aF64WQJcnXzvgSvY",
+          "mode": "list",
+          "cachedResultName": "n8n model",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pZF-ouLF_tDNrHl3HSpHaa4rCO_aF64WQJcnXzvgSvY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pZF-ouLF_tDNrHl3HSpHaa4rCO_aF64WQJcnXzvgSvY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Gmail Trigger').item.json.id }}",
+            "date": "={{ $now }}",
+            "subject line": "={{ $('Gmail Trigger').item.json.Subject }}",
+            "summary ": "={{ $json.message.content }}",
+            "snippet": "={{ $('Gmail Trigger').item.json.snippet }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject line",
+              "displayName": "subject line",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "summary ",
+              "displayName": "summary ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "snippet",
+              "displayName": "snippet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        860,
+        -160
+      ],
+      "id": "4c7a6a0f-b3ab-48f9-bb8f-6cfbd81f16a8",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ITfSiTrbWbVGaYUH",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $json.message.content.subject_line }}",
+        "message": "={{ $json.message.content.email_body }}",
+        "options": {
+          "threadId": "={{ $('Gmail Trigger').item.json.threadId }}",
+          "sendTo": "={{ $('Gmail Trigger').item.json.From }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        860,
+        20
+      ],
+      "id": "e56b0ca3-7ee1-4900-9c83-b51877e76bfd",
+      "name": "Gmail5",
+      "webhookId": "fe62a3d1-3a3b-42e4-b14c-b43c246cc788",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lWKAhtK72OhmbnYh",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "you are an intelligent bot at replying mails\npls sign up on all email as follows:\n\"Best,\nShubham\"\n\nalso separate paragraphs by line breaks",
+              "role": "system"
+            },
+            {
+              "content": "=here is the email to reply to:\nsubject: {{ $('Gmail Trigger').item.json.Subject }}\nbody:{{ $('Gmail Trigger').item.json.snippet }}\nthis email is from :{{ $('Gmail Trigger').item.json.From }}"
+            },
+            {
+              "content": "pls format the data in JSON format\n{\n\" subject_line \"=\"\",\n\"email_body\"= \"\"\n}\n",
+              "role": "assistant"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        480,
+        40
+      ],
+      "id": "28b46d57-e5dc-4917-8c23-8ea2334cfe19",
+      "name": "OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "7Vq3JNqxT6GaWRqB",
+          "name": "OpenAi account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "19781f533f611212",
+          "threadId": "19781f51372f6d05",
+          "snippet": "this is a personal mail from a friend",
+          "payload": {
+            "mimeType": "multipart/alternative"
+          },
+          "sizeEstimate": 553,
+          "historyId": "4783",
+          "internalDate": "1750232019000",
+          "labels": [
+            {
+              "id": "SENT",
+              "name": "SENT"
+            },
+            {
+              "id": "INBOX",
+              "name": "INBOX"
+            },
+            {
+              "id": "IMPORTANT",
+              "name": "IMPORTANT"
+            },
+            {
+              "id": "UNREAD",
+              "name": "UNREAD"
+            }
+          ],
+          "Subject": "test",
+          "From": "Shubham Ahuja <shubham.ahuja@upthrust.io>",
+          "To": "Shubham Ahuja <shubham.ahuja@upthrust.io>"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "Gmail1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gmail2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gmail3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail1": {
+      "main": [
+        [
+          {
+            "node": "Gmail4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail2": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail3": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Gmail5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a084edc8-aa4a-4128-acb6-d6f8b9a1ee74",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "77a9f3703de1bb2875b700929913807a460fa4915df5c82dcbed219e185fa7f3"
+  },
+  "id": "n8Si1gLqfrfVJXH0",
+  "tags": []
+}
